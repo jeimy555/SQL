@@ -1,0 +1,140 @@
+create database;
+use colegio;
+create table Curso(
+idCurso varchar(10) primary key  not null,
+nombreCurso varchar(30) not null,
+cantidadEstudiantes int(2) not null
+);
+
+create table estudiante(
+idEstudiante int(10) primary key not null,
+nombreCompleto varchar(30) not null,
+idCursoFK varchar(10) not null
+);
+
+create table asistencia(
+numeroFalla int(2) primary key null auto_increment,
+horaFalla varchar(10) not null,
+diaFalla date not null,
+idEstudianteFK int(10) not null,
+nombreMateriaFK  varchar(30) not null
+
+);
+
+create table materia(
+nombreMateria varchar(30) primary key not null,
+idCursoFK1 varchar(10) not null
+);
+create table actividad(
+codigoActividad int(5) primary key null auto_increment,
+nombreActividad varchar(30)  not null,
+notaActividad int(3) not null,
+nombreMateriaFK1  varchar(30) not null
+);
+create table instructor(
+nombreCompleto varchar(30) not null,
+identificacionInstructor int(10) primary key not null,
+nombreMateriaFK2  varchar(30) not null
+);
+
+
+
+ALTER TABLE Asistencia
+ADD CONSTRAINT FK_ID_Estudiante
+FOREIGN KEY Asistencia(idEstudianteFK) REFERENCES estudiante(idEstudiante);
+
+ALTER TABLE Asistencia
+ADD CONSTRAINT FK_Nombre_Materia
+FOREIGN KEY asistencia(nombreMateriaFK) REFERENCES materia(nombreMateria);
+
+ALTER TABLE estudiante
+ADD CONSTRAINT estudiante_Curso
+FOREIGN KEY estudiante(idCursoFK) REFERENCES curso(idCurso);
+
+ALTER TABLE Materia
+ADD CONSTRAINT FK_ID_Curso1
+FOREIGN KEY materia(idCursoFK1) REFERENCES curso(idCurso);
+
+
+
+ALTER TABLE instructor
+ADD CONSTRAINT FK_Nombre_materia2
+FOREIGN KEY instructor(nombreMateriaFK2) REFERENCES Materia(nombreMateria);
+
+
+ALTER TABLE Actividad
+ADD CONSTRAINT FK_Nombre_materia1
+FOREIGN KEY actividad(nombreMateriaFK1) REFERENCES Materia(nombreMateria);
+
+insert into curso () values ("101JM","primero",30);
+insert into curso () values ("901JT","noveno",30);
+insert into curso () values ("1001JM","decimo",30);
+insert into curso () values ("1101JT","once",30);
+insert into curso () values ("601JM","sexto",30);
+insert into curso () values ("701JT","d",30);
+insert into curso () values ("801JM","decimo",30);
+insert into curso () values ("1002JT","decimo",30);
+insert into curso () values ("1102JM","decimo",30);
+insert into curso () values ("1103JT","decimo",30);
+
+insert into materia () values ("español","101JM");
+insert into materia () values ("calculo","901JT");
+insert into materia () values ("diseño","1001JM");
+insert into materia () values ("fisica","1101JT");
+insert into materia () values ("quimica","601JM");
+insert into materia () values ("ingles","701JT");
+insert into materia () values ("calculo2","801JM");
+insert into materia () values ("fisica2","1002JT");
+insert into materia () values ("ingles2","1102JM");
+insert into materia () values ("calculo3","1103JT");
+
+
+
+
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "sopa de letras 1.1",80,"español");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "sopa de letras 1.2",60,"ingles");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "taller1",50,"diseño");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "taller2",70,"calculo3");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "sopa de letras",100,"español");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "crucigrama",20,"fisica");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "resumen",10,"español");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "lectura1",00,"ingles2");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "trimestral",80,"fisica");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "trimestral2",10,"calculo");
+insert into actividad (nombreActividad,notaActividad,nombreMateriaFK1) values ( "sopa de letras",90,"quimica");
+
+
+insert into estudiante () values (1032677961,"Jeimy Barbosa Avila","1001JM");
+insert into estudiante () values (1068744654,"pily Barbosa lopez","101JM");
+insert into estudiante () values (1549268455,"santiago Barbosa herrera","901JT");
+insert into estudiante () values (1548785554,"Jaider Quimbaya","1101JT");
+insert into estudiante () values (1032672961,"yeison jimenez","601JM");
+insert into estudiante () values (1068778654,"jeferson gutierrez","701JT");
+insert into estudiante () values (1549212455,"santiago lopez","801JM");
+insert into estudiante () values (1548712554,"Jeimy Barbosa ramirez","1002JT");
+insert into estudiante () values (1549267855,"Martin ramirez","1102JM");
+insert into estudiante () values (1548185554,"julian sanchez","1103JT");
+
+insert into instructor () values ( "jeferson gutierrez",1032177961,"español");
+insert into instructor () values ( "dilan gonzales",10326775361,"ingles");
+insert into instructor () values ( "silvia Nandiz",1032671261,"diseño");
+insert into instructor () values ( "pily Barbosa",1032677451,"calculo3");
+insert into instructor () values ( "Johan silva",1032677945,"español");
+insert into instructor () values ( "Camilo Suarez",1032645661,"fisica");
+insert into instructor () values ( "diego navarro",2032677861,"español");
+insert into instructor () values ( "santiago Finiquito",1892677961,"ingles2");
+insert into instructor () values ( "jaider Estupiñan",1037877961,"fisica");
+insert into instructor () values ( "yeison Jimenez",1032678961,"calculo");
+insert into instructor () values ( "cristian gonzales",1023677961,"quimica");
+
+
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2022/04/05,"02:24",1032677961,"fisica");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2023/04/05,"22:34",1068744654,"calculo");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2020/04/05,"07:25",1549268455,"quimica");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2021/04/05,"05:24",1548785554,"ingles2");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2022/04/05,"08:14",1032672961,"calculo2");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2023/04/05,"08:04",1068778654,"ingles");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2023/04/05,"08:04",1549212455,"fisica");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2023/04/05,"08:04",1548712554,"diseño");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2023/04/05,"08:04",1549267855,"fisica2");
+insert into asistencia (diaFalla,horaFalla,idEstudianteFk,nombreMateriaFK) values (2023/04/05,"08:04",1548185554,"español");
